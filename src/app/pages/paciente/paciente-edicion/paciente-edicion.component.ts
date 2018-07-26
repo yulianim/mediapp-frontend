@@ -1,8 +1,8 @@
 import { PacienteService } from './../../../_service/paciente.service';
 import { Paciente } from './../../../_model/paciente';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '../../../../../node_modules/@angular/forms';
-import { ActivatedRoute, Router } from '../../../../../node_modules/@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-paciente-edicion',
@@ -10,27 +10,26 @@ import { ActivatedRoute, Router } from '../../../../../node_modules/@angular/rou
   styleUrls: ['./paciente-edicion.component.css']
 })
 export class PacienteEdicionComponent implements OnInit {
-  id:number;
-  paciente:Paciente;
-  form:FormGroup;
-  edicion:boolean=false;
 
-  constructor(private PacienteService:PacienteService, private route:ActivatedRoute, private router:Router) {
-    this.paciente=new Paciente();
-    this.form=new FormGroup(
-      {
+  id: number;
+  paciente: Paciente;
+  form: FormGroup;
+  edicion: boolean = false;
+
+  constructor(private pacienteService: PacienteService, private route: ActivatedRoute, private router: Router) {
+    this.paciente = new Paciente();
+
+    this.form = new FormGroup({
       'id': new FormControl(0),
       'nombres': new FormControl(''),
       'apellidos': new FormControl(''),
       'dni': new FormControl(''),
       'direccion': new FormControl(''),
       'telefono': new FormControl('')
+    });
+  }
 
-      }
-    );
-   }
-
-   ngOnInit() {
+  ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       this.edicion = params['id'] != null;
@@ -40,7 +39,7 @@ export class PacienteEdicionComponent implements OnInit {
 
   private initForm() {
     if (this.edicion) {
-      this.PacienteService.listarPacientePorId(this.id).subscribe(data => {
+      this.pacienteService.listarPacientePorId(this.id).subscribe(data => {
         let id = data.idPaciente;
         let nombres = data.nombres;
         let apellidos = data.apellidos;
@@ -70,34 +69,33 @@ export class PacienteEdicionComponent implements OnInit {
 
     if (this.edicion) {
       //update
-      this.PacienteService.modificar(this.paciente).subscribe(data => {
+      this.pacienteService.modificar(this.paciente).subscribe(data => {
         console.log(data);
         //if (data === 1) {
-          this.PacienteService.listarPacientes().subscribe(pacientes => {
-            this.PacienteService.pacienteCambio.next(pacientes);
-            this.PacienteService.mensaje.next('Se modificó');
+          this.pacienteService.listarPacientes().subscribe(pacientes => {
+            this.pacienteService.pacienteCambio.next(pacientes);
+            this.pacienteService.mensaje.next('Se modificó');
           });
         //} else {
           //this.pacienteService.mensaje.next('No se modificó');
         //}
+       
       });
     } else {
-      //insert
-      this.PacienteService.registrar(this.paciente).subscribe(data => {
+      this.pacienteService.registrar(this.paciente).subscribe(data => {
         console.log(data);
         //if (data === 1) {
-          this.PacienteService.listarPacientes().subscribe(pacientes => {
-            this.PacienteService.pacienteCambio.next(pacientes);
-            this.PacienteService.mensaje.next('Se registró');
+          this.pacienteService.listarPacientes().subscribe(pacientes => {
+            this.pacienteService.pacienteCambio.next(pacientes);
+            this.pacienteService.mensaje.next('Se registró');
           });
         //} else {
           //this.pacienteService.mensaje.next('No se registró');
         //}
-      });
+        });
     }
 
     this.router.navigate(['paciente'])
   }
-
 
 }
