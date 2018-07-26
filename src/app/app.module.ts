@@ -15,6 +15,7 @@ import { Not403Component } from './pages/not403/not403.component';
 import { EspecialidadEdicionComponent } from './pages/especialidad/especialidad-edicion/especialidad-edicion.component';
 import { ExamenEdicionComponent } from './pages/examen/examen-edicion/examen-edicion.component';
 import { ConsultaComponent } from './pages/consulta/consulta.component';
+import { DialogoComponent } from './pages/medico/dialogo/dialogo.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,10 @@ import { ConsultaComponent } from './pages/consulta/consulta.component';
     Not403Component,
     EspecialidadEdicionComponent,
     ExamenEdicionComponent,
+    DialogoComponent,
    
   ],
+  entryComponents:[DialogoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
