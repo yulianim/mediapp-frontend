@@ -30,20 +30,17 @@ export class DialogoComponent implements OnInit {
     
     if(this.medico != null && this.medico.idMedico > 0){
       this.medicoService.modificar(this.medico).subscribe(data => {
-        if (data === 1) {
-          this.medicoService.listarMedicos().subscribe(medicos => {
-            //this.medicoService.medicosCambio.next(medicos);
+            this.medicoService.listarMedicos().subscribe(medicos => {
+            this.medicoService.medicosCambio.next(medicos);
             this.medicoService.mensaje.next("Se modifico");
           });
-        } else {
-          this.medicoService.mensaje.next("No se pudo modificar");
-        }
+       
       });
     }else{
       this.medicoService.registrar(this.medico).subscribe(data => {
         if (data === 1) {
           this.medicoService.listarMedicos().subscribe(medicos => {
-            //this.medicoService.medicosCambio.next(medicos);
+            this.medicoService.medicosCambio.next(medicos);
             this.medicoService.mensaje.next("Se registro");
           });
         } else {

@@ -1,4 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { ServerErrorsInterceptor } from './_shared/server-errors.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -41,7 +42,11 @@ import { DialogoComponent } from './pages/medico/dialogo/dialogo.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, 
+    useClass: ServerErrorsInterceptor,
+    multi:true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

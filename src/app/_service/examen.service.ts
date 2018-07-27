@@ -8,13 +8,13 @@ import { HttpClient } from '../../../node_modules/@angular/common/http';
   providedIn: 'root'
 })
 export class ExamenService {
-  ExamenCambio = new Subject<Examen[]>();
+  examenCambio = new Subject<Examen[]>();
   mensaje = new Subject<string>();
   url: string = `${HOST}/examenes`;
 
   constructor(private http: HttpClient) { }
 
-  listarExamens(){
+  listarExamenes(){
     return this.http.get<Examen[]>(this.url);
   }
   listarExamenPorId(id:number){

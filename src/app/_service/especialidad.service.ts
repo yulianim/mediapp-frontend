@@ -9,13 +9,13 @@ import { HttpClient } from '../../../node_modules/@angular/common/http';
 })
 export class EspecialidadService {
 
-  EspecialidadCambio = new Subject<Especialidad[]>();
+  especialidadCambio = new Subject<Especialidad[]>();
   mensaje = new Subject<string>();
   url: string = `${HOST}/especialidades`;
 
   constructor(private http: HttpClient) { }
 
-  listarEspecialidads(){
+  listarEspecialidades(){
     return this.http.get<Especialidad[]>(this.url);
   }
   listarEspecialidadPorId(id:number){

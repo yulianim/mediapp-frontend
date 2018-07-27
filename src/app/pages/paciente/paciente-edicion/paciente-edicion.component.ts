@@ -1,7 +1,7 @@
 import { PacienteService } from './../../../_service/paciente.service';
 import { Paciente } from './../../../_model/paciente';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
@@ -21,11 +21,11 @@ export class PacienteEdicionComponent implements OnInit {
 
     this.form = new FormGroup({
       'id': new FormControl(0),
-      'nombres': new FormControl(''),
-      'apellidos': new FormControl(''),
-      'dni': new FormControl(''),
-      'direccion': new FormControl(''),
-      'telefono': new FormControl('')
+      'nombres': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
+      'apellidos': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(70)]),
+      'dni': new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
+      'direccion': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
+      'telefono': new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(9)])
     });
   }
 
@@ -48,12 +48,12 @@ export class PacienteEdicionComponent implements OnInit {
         let telefono = data.telefono;
 
         this.form = new FormGroup({
-          'id': new FormControl(id),
-          'nombres': new FormControl(nombres),
-          'apellidos': new FormControl(apellidos),
-          'dni': new FormControl(dni),
-          'direccion': new FormControl(direccion),
-          'telefono': new FormControl(telefono)
+      'id': new FormControl(id),
+      'nombres': new FormControl(nombres),
+      'apellidos': new FormControl(apellidos),
+      'dni': new FormControl(dni),
+      'direccion': new FormControl(direccion),
+      'telefono': new FormControl(telefono)
         });
       });
     }
