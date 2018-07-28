@@ -68,4 +68,15 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <button mat-raised-button color="primary" (click)="agregarExamen()">Agregar Examen</button>
+    
+  <mat-toolbar *ngIf="examenesSeleccionados.length===0">No hay exámenes agregados</mat-toolbar>  
+
+  <mat-toolbar *ngFor="let d of examenesSeleccionados; let i=index">
+    {{d.nombre}}
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="warn" (click)="removerExamen(i)">Remover</button>
+  </mat-toolbar>
+
+  <button mat-raised-button color="primary" (click)="aceptar()" [disabled]="estadoBotonRegistrar()">Registrar</button>
 </div>
