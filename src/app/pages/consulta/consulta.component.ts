@@ -123,7 +123,10 @@ export class ConsultaComponent implements OnInit {
     this.consulta.paciente = paciente;
     this.consulta.medico = medico;
     this.consulta.detalleConsulta = this.detalleConsulta;
-    this.consulta.fecha = this.fechaSeleccionada;
+    //https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
+    var tzoffset = (this.fechaSeleccionada).getTimezoneOffset() * 60000; //offset in milliseconds
+    var localISOTime = (new Date(Date.now() - tzoffset)).toISOString()
+    this.consulta.fecha = localISOTime;
 
     let consultaListaExamen = new ConsultaListaExamen();
     consultaListaExamen.consulta = this.consulta;

@@ -17,6 +17,7 @@ import { EspecialidadEdicionComponent } from './pages/especialidad/especialidad-
 import { ExamenEdicionComponent } from './pages/examen/examen-edicion/examen-edicion.component';
 import { ConsultaComponent } from './pages/consulta/consulta.component';
 import { DialogoComponent } from './pages/medico/dialogo/dialogo.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DialogoComponent } from './pages/medico/dialogo/dialogo.component';
     EspecialidadEdicionComponent,
     ExamenEdicionComponent,
     DialogoComponent,
+    LoginComponent,
    
   ],
   entryComponents:[DialogoComponent],
